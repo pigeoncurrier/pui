@@ -1,5 +1,6 @@
 if (Property.find().count() === 0) {
     Property.insert({
+        id:1,
         name: 'Hotel test 1',
         address: 'via some place 1',
         zip:"00100",
@@ -7,6 +8,7 @@ if (Property.find().count() === 0) {
         cityId:1  // lat lon better
     });
     Property.insert({
+        id:2,
         name: 'Hotel test 2',
         address: 'via some other place 2',
         zip:"00120",
@@ -14,6 +16,7 @@ if (Property.find().count() === 0) {
         cityId:1  // lat lon better
     });
     Property.insert({
+        id:3,
         name: 'Hotel test 3',
         address: 'via some more place 1',
         zip:"00100",
