@@ -1,6 +1,13 @@
 <template name="proposalRecap">
+
+
     <div>
-        some recap about the proopsal: {{name}}
+        some recap about the proopsal
+        {{#if selectedProperties}}
+            <br/>
+            <span>{{selectedProperty.name}}, {{selectedProperty.address}} {{selectedProperty.zip}},</span>
+        {{/if}}
     </div>
+
 </template>
 

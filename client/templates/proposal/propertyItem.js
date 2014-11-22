@@ -1,19 +1,28 @@
 Template.propertyItem.events({
-    'click #property-add': function(e) {
+    'click #someids': function(e) {
 
         e.preventDefault();
 
-        console.log("ahahahhahahah");
-
-        /*
-        var propertyId    = $(e.target).attr("meta-attr");
+        var propertyId    = parseInt($(e.target).attr("meta-attr"));
         var propertyToAdd = Property.findOne({id:propertyId});
         // manage an array of properties
 
-        console.log(JSON.stringify(propertyToAdd));
+        var selectedPropertyArray = Session.get('selectedProperties');
+        if(!_.isArray(selectedPropertyArray)){
+            Session.set('selectedProperties', [propertyToAdd]);
+        } else {
+            Session.set('selectedProperties', [propertyToAdd]);
+        }
 
 
-        Session.set('selectedProperty', propertyToAdd);
-*/
+
+
+
+
+
+
+
+
+
     }
 });

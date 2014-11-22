@@ -1,10 +1,10 @@
 
 Template.proposalRecap.helpers({
 
-    selectedProperty: function(){
+    selectedProperties: function(){
 
-        var selectedProperty = Session.get('selectedProperty');
-        return selectedProperty
+        var selectedProperties = Session.get('selectedProperties');
+        return selectedProperties
 
     }
 });
