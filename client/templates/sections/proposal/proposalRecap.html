@@ -1,0 +1,15 @@
+<template name="proposalRecap">
+
+
+    <div>
+        some recap about the propsal
+        {{#each selectedProperties}}
+            <br/>
+            <span>name: {{name}}, address:{{address}} - {{zip}}</span>
+            <a id="removeProp" meta-attr="{{id}}">delete</a>
+        {{/each}}
+
+    </div>
+
+</template>
+
