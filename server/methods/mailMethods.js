@@ -1,12 +1,17 @@
 Meteor.methods({
     sendRequestMailSet: function(data){
 
-        console.log("in send mail");
+        var sendEnabled = false;
+        
+        if (!sendEnabled) {
+            console.log("Send mail disabled");
+        }
 
-
-        var user = Meteor.users.find(this.userId);
+        var user= Meteor.users.findOne(this.userId);
+        
         if(!user){
-            return false;
+            console.log("ERROR");
+            return false; 
         }
 
         var mailToBeSent   = data.propertyMailSet;
@@ -14,20 +19,33 @@ Meteor.methods({
 
         //TODO: move it into a util mail class
         // add checks!!
-        for(var i= 0; i<mailToBeSent.length; i++){
-            Email.send({
-                from: "pigeon.currier@gmail.com",
-                to: mailToBeSent[i],
-                subject: "You have a new request from a Pigeon user!",
-                text: "Hi you have a new stay request from a Pigeon user\n check http://localhost:3000/reques_details/?reqid=" + userRequestId
-            });
+        for(var i= 0; i<mailToBeSent.length; i++) {
+            var emailToHotel = {
+                from:       "pigeon.currier@gmail.com",
+                to:         mailToBeSent[i],
+                subject:    "You have a new request from a Pigeon user!",
+                text:      "Hi you have a new stay request from a Pigeon user. Check http://localhost:3000/reques_details/?reqid=" + userRequestId + "\""
+            };
+            // console.log(JSON.stringify(emailToHotel));
+            LogEmail.insert(emailToHotel);
+            
+            if (sendEnabled) {
+                Email.send(emailToHotel);
+            }
         }
 
-        Email.send({
-            from: "pigeon.currier@gmail.com",
-            to: user.emails[0].address,
-            subject: "you have sent a stay request",
-            text: "Your request was correctly forwarded to the selected properties."
-        });
+        var emailToUser = {
+            from:       "pigeon.currier@gmail.com",
+            to:         user.emails[0].address,
+            subject:    "You have sent a stay request",
+            text:      "Your request was correctly forwarded to the selected properties."
+        };
+        // console.log(JSON.stringify(emailToSend2));
+        
+        LogEmail.insert(emailToUser);
+        
+        if (sendEnabled) {
+            Email.send(emailToUser);
+        }
     }
 })
