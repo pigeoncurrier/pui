@@ -1,0 +1,24 @@
+<template name="requestStepThree">
+
+    <li id="li_3" >
+        <label class="description" for="element_3">Put a price on your hotel</label>
+        <div class="container">
+
+        {{#if selectedProperties}}
+            {{#each selectedProperties}}
+            <div class="row">
+                <div class='col-sm-6'>
+                    <span>for the {{name}} i want to pay around</span>
+                    <input type='text' value="{{price}}" id="price_p_{{id}}" name="price_p_{{id}}" meta-attr="{{id}}" class="form-control"/>
+                </div>
+            </div>
+            {{/each}}
+        {{else}}
+            You didn't select any hotel, please find one and give is a price
+        {{/if}}
+
+
+
+        </div>
+    </li>
+</template>

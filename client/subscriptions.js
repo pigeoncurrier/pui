@@ -1,5 +1,2 @@
 Meteor.subscribe('property');
-Meteor.subscribe('userProposal');
-
-
-
+Meteor.subscribe('userRequest');

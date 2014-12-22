@@ -9,8 +9,8 @@
                     <span class="icon-bar">ccccccccc</span>
                 </button>
                 <a class="navbar-brand" href="{{pathFor 'home'}}">home</a>
-                <a class="navbar-brand" href="{{pathFor 'proposal'}}">create a proposal</a>
-                {{#if currentUser}}<a class="navbar-brand" href="{{pathFor 'proposalList'}}">my submitted proposals</a>{{/if}}
+                <a class="navbar-brand" href="{{pathFor 'createRequest'}}">create a request</a>
+                {{#if currentUser}}<a class="navbar-brand" href="{{pathFor 'userRequests'}}">my submitted requests</a>{{/if}}
             </div>
             <div class="collapse navbar-collapse" id="navigation">
                 <ul class="nav navbar-nav navbar-right">

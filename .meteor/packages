@@ -10,3 +10,6 @@ iron:router
 ian:accounts-ui-bootstrap-3
 accounts-password
 mrt:underscore-string-latest
+tsega:bootstrap3-datetimepicker
+email
+
