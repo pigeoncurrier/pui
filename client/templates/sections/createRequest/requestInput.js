@@ -39,7 +39,7 @@ Template.requestInput.events({
 
         //console.log(JSON.stringify(userRequestElement));
 
-        //TODO: manage errors!
+        //TODO: manage errors! and move it to a method
         userRequestElement._id = UserRequest.insert(userRequestElement);
         var justBuiltRequest = {id:userRequestElement._id}
         var dataForMail = {propertyMailSet: mailToBeSent, userRequestId:userRequestElement._id};
