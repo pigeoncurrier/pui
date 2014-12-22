@@ -22,7 +22,7 @@ Template.requestInput.events({
                 var price = $(e.target).find(propPriceSelector).val();
                 selectedProperties[i].price  = price;
                 selectedProperties[i].status = com.pigeon.util.requestStatusEnum.PENDIGN
-                mailToBeSent.push(selectedProperties[i].price)
+                mailToBeSent.push(selectedProperties[i].mail)
             }
         };
 
