@@ -24,10 +24,6 @@ Template.propertyInput.events({
 
         console.log("just before data collection");
 
-
-
-
-
         var address =  _.clean($(e.target).find('[id=streetLine1]').val() + " " + $(e.target).find('[id=streetLine2]').val())
 
         var propertyData = {
@@ -75,22 +71,7 @@ Template.propertyInput.events({
     }
 });
 
-
+// just to make the if easier
 Template.propertyInput.helpers({
-
-    notCurrentUser: function(){return !Meteor.user()},
-
-    propertyData: function(){
-
-        var user = Meteor.user();
-        if(!user){
-            return {}
-        }
-
-        var userProperty = Property.findOne({owner: user._id});
-
-        return {property:userProperty, user:user}
-
-    }
-
+    notCurrentUser: function(){return !Meteor.user()}
 });

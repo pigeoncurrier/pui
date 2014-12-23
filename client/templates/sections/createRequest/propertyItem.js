@@ -3,15 +3,15 @@ Template.propertyItem.events({
 
         e.preventDefault();
 
-        var propertyId    = parseInt($(e.target).attr("meta-attr"));
-        var propertyToAdd = Property.findOne({id:propertyId});
+        var propertyId    = $(e.target).attr("meta-attr");
+        var propertyToAdd = Property.findOne({_id:propertyId});
 
         if(propertyToAdd){
             var selectedPropertyArray = Session.get('selectedProperties');
             if(!_.isArray(selectedPropertyArray)){
                 selectedPropertyArray = [];
             }
-            selectedPropertyArray     = com.pigeon.util.toggleObjInArrayMatchingKey(selectedPropertyArray, propertyToAdd, "id");
+            selectedPropertyArray     = com.pigeon.util.toggleObjInArrayMatchingKey(selectedPropertyArray, propertyToAdd, "_id");
             Session.set('selectedProperties', selectedPropertyArray);
         }
 

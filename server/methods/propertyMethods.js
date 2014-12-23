@@ -64,25 +64,31 @@ Meteor.methods({
             state:      data.state,
             zip:        data.zip,
             country:    data.country,
-            status:     com.pigeon.util.propertyStatusEnum.ACTIVE,
+            status:     com.pigeon.util.propertyStatusEnum.NOT_ACTIVE,
             owner:      newPropertyUser
         }
 
-
+        console.log("data from form");
         console.log(JSON.stringify(propertyData));
 
 
-        // exec update or insert
-        var operationResult = Property.update(
-                                                updateOrInsertQs,
-                                                propertyData,
-                                                { upsert: true },
-                                                function(err, numberAffected, rawResponse) {
-                                                    // send confirm email?
-                                                }
-        );
+        var property = Property.findOne(updateOrInsertQs)
 
-        console.log(JSON.stringify(operationResult));
+        console.log(JSON.stringify(updateOrInsertQs));
+
+        console.log(JSON.stringify(property));
+//
+//        // exec update or insert
+//        var operationResult = Property.update(
+//                                                updateOrInsertQs,
+//                                                propertyData,
+//                                                { upsert: true },
+//                                                function(err, numberAffected, rawResponse) {
+//                                                    // send confirm email?
+//                                                }
+//        );
+
+        //console.log(JSON.stringify(operationResult));
 
     }
 })
