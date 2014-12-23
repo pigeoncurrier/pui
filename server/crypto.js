@@ -18,7 +18,7 @@ com.pigeon.crypto = (function(namespace){
         //console.log("..." + decrypted.toString(CryptoJS.enc.Utf8));
         return decrypted.toString(CryptoJS.enc.Utf8);
     }
-    
+
     _this.cryptString =_cryptString;
     
     _this.decryptString =_decryptString;
