@@ -18,7 +18,7 @@ Template.requestInput.events({
         if(selectedProperties){
             for (var i = 0; i < selectedProperties.length; i += 1) {
                 var selectedProperty    = selectedProperties[i];
-                var propPriceSelector   = '[name=price_p_' + selectedProperty.id +  ']';
+                var propPriceSelector   = '[name=price_p_' + selectedProperty._id +  ']';
                 var price = $(e.target).find(propPriceSelector).val();
                 selectedProperties[i].price  = price;
                 selectedProperties[i].status = com.pigeon.util.requestStatusEnum.PENDIGN

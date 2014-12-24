@@ -16,19 +16,58 @@ Template.userRequests.helpers({
 
     },
 
-    // TODO: move it in util!
-    getLabelFromRequestStatus: function (statusAsNum) {
 
-        if (statusAsNum == com.pigeon.util.requestStatusEnum.PENDIGN) {
-            return "PENDING";
-        } else if (statusAsNum == com.pigeon.util.requestStatusEnum.PROPOSAL) {
-            return "Request accepted!";
-        } else if (statusAsNum == com.pigeon.util.requestStatusEnum.REJECTED) {
-            return "Sorry your request was rejected";
+
+
+    // TODO: idem come sopra e i testtttttttttttt
+    aggregatePropertiesData: function(selectedProperties){
+
+
+        console.log("ciao ciao");
+
+        var min         = false,
+            max         = false,
+            statusArray = [],
+            response    = {};
+
+        for(var i=0; i<selectedProperties.length; i++){
+            var price = selectedProperties[i].price;
+
+            console.log("price:" + price);
+
+            if(!min || price<min){
+                min = price;
+            }
+
+            console.log("min:" + min);
+
+            if(!max || price>max){
+                max = price;
+            }
+
+            console.log("max:" + max);
+
+            statusArray.push(selectedProperties[i].status);
+
         }
 
-        return "status unrecognized";
+        if(min==max){
+            response.minAndMax = min;
+        } else {
+            response.minAndMax = min+"/"+max;
+        }
+
+        var mergedStatus = _.reduce(statusArray, function(memo, i){
+                return com.pigeon.util.mergeRequestStatus(memo, statusArray[i]);
+
+        })
+
+        response.status = com.pigeon.util.getLabelFromRequestStatus(mergedStatus);
+
+        return response;
+
     }
+
 
     /*
     ,

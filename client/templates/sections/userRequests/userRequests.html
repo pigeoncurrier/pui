@@ -10,8 +10,8 @@
                 <th>To</th>
                 <th>Rooms</th>
                 <th>Guest</th>
-                <th>Children</th>
-                <th>Properties</th>
+                <th>From/to</th>
+                <th>Status</th>
             </tr>
         </thead>
         <tbody>
@@ -21,20 +21,11 @@
                 <td>{{from}}</td>
                 <td>{{to}}</td>
                 <td>{{rooms}}</td>
-                <td>{{guest}}</td>
-                <td>{{children}}</td>
-                <td>
-                    {{#each selectedProperties}}
-                        <table class="table">
-                           <tr>
-                               <td>{{name}}</td>
-                               <td>{{price}}</td>
-                               <td>{{getLabelFromRequestStatus 1}}</td>
-                           </tr>
-                        </table>
-
-                    {{/each}}
-                </td>
+                <td>{{guest}} {{#if children}} + {{children}}{{/if}}</td>
+                {{#with aggregatePropertiesData selectedProperties}}
+                    <td>{{minAndMax}}</td>
+                    <td>{{status}}</td>
+                {{/with}}
             </tr>
         {{/each}}
         </tbody>
