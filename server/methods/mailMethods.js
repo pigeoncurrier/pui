@@ -15,8 +15,10 @@ Meteor.methods({
         }
 
         var mailToBeSent   = data.propertyMailSet;
-        var userRequestId  = data.userRequestId;
-
+        
+        var userRequestId = com.pigeon.crypto.cryptString(data.userRequestId);
+        var userRequestIdEncoded = com.pigeon.base64.base64_encode(""+userRequestId);
+        
         //TODO: move it into a util mail class
         // add checks!!
         for(var i= 0; i<mailToBeSent.length; i++) {
@@ -24,7 +26,7 @@ Meteor.methods({
                 from:       "pigeon.currier@gmail.com",
                 to:         mailToBeSent[i],
                 subject:    "You have a new request from a Pigeon user!",
-                text:      "Hi you have a new stay request from a Pigeon user. Check http://localhost:3000/reques_details/?reqid=" + userRequestId + "\""
+                text:      "Hi you have a new stay request from a Pigeon user. Check http://localhost:3000/property_data/" + userRequestIdEncoded
             };
             // console.log(JSON.stringify(emailToHotel));
             LogEmail.insert(emailToHotel);

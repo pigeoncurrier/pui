@@ -17,7 +17,7 @@
         <tbody>
 
         {{#each submittedRequests}}
-            <tr>
+            <tr  >
                 <td>{{from}}</td>
                 <td>{{to}}</td>
                 <td>{{rooms}}</td>
@@ -26,6 +26,7 @@
                     <td>{{minAndMax}}</td>
                     <td>{{status}}</td>
                 {{/with}}
+                <td><a class="request-detail" meta-attr="{{_id}}" href="">details</a></td>
             </tr>
         {{/each}}
         </tbody>

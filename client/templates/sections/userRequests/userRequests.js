@@ -23,8 +23,6 @@ Template.userRequests.helpers({
     aggregatePropertiesData: function(selectedProperties){
 
 
-        console.log("ciao ciao");
-
         var min         = false,
             max         = false,
             statusArray = [],
@@ -84,3 +82,21 @@ Template.userRequests.helpers({
     }*/
 
 });
+
+
+Template.userRequests.events({
+    'click .request-detail': function(e){
+
+
+
+        e.preventDefault();
+
+        var requestRoute    = '/request_detail/' + $(e.target).attr("meta-attr");
+        console.log("rq id:" + requestRoute);
+
+
+        Router.go(requestRoute);
+
+        //window.location = requestRoute;
+    }
+})

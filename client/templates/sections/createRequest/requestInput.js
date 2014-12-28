@@ -27,13 +27,14 @@ Template.requestInput.events({
         };
 
         var userRequestElement = {
-            from:       $(e.target).find('[name=from]'    ).val(),
-            to:         $(e.target).find('[name=to]'      ).val(),
-            guest:      $(e.target).find('[name=guest]'   ).val(),
-            rooms:      $(e.target).find('[name=rooms]'   ).val(),
-            children:   $(e.target).find('[name=children]').val(),
-            selectedProperties:selectedProperties,
-            userId:     Meteor.userId()
+            from:               $(e.target).find('[name=from]'    ).val(),
+            to:                 $(e.target).find('[name=to]'      ).val(),
+            guest:              $(e.target).find('[name=guest]'   ).val(),
+            rooms:              $(e.target).find('[name=rooms]'   ).val(),
+            children:           $(e.target).find('[name=children]').val(),
+            selectedProperties: selectedProperties,
+            userId:             Meteor.userId(),
+            creationTime:       Date.now()
 
         };
 
