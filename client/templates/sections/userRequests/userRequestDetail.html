@@ -1,0 +1,33 @@
+<template name="userRequestDetail">
+    <span id="rq-details-descr">Request Details</span>
+    <span>From:{{from}}, To: {{to}}</span>
+    <span>rooms: {{rooms}}</span>
+    <span>guests{{guest}}</span>
+    <span>childrens: {{children}}</span>
+
+
+
+    <p>This request will expire in:</p>
+    <span id="clock"></span>
+    <br>
+    <script>
+        $('#clock').countdown({{getRequestLifeTime creationTime}}, function(event) {
+               $(this).html(event.strftime('%D days %H:%M:%S'));
+         });
+    </script>
+
+    {{#each selectedProperties}}
+        <ul>
+            <li>
+                <div id="tab-selector">
+                    <span>Name:{{name}}</span>
+                    <span>Price:{{price}}</span>
+                </div>
+                <div id="tab-details">
+                    <span>Status{{getLabelFromRequestStatus status}}</span>
+                </div>
+                <p>e qui ci vanno i messaggi</p>
+            </li>
+        </ul>
+    {{/each}}
+</template>
