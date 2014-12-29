@@ -1,33 +1,63 @@
 <template name="userRequestDetail">
-    <span id="rq-details-descr">Request Details</span>
-    <span>From:{{from}}, To: {{to}}</span>
-    <span>rooms: {{rooms}}</span>
-    <span>guests{{guest}}</span>
-    <span>childrens: {{children}}</span>
+    <div id="rq-details-descr">
+        <h2>Request Details</h2>
+        <table class="table table-condensed">
+            <thead>
+            <tr>
+                <th>
+                    {{#if isProperty}}
+                        User Detail
+                    {{else}}
+                        Hotels Contacted
+                    {{/if}}</th>
+                <th>Message Board</th>
+                <th>Request Date</th>
+                <th>Stay Data</th>
+                <th>Time Left</th>
+            </tr>
+            <tr>
+                <td>V</td>
+                <td>V</td>
+                <td>creationTime</td>
+                <td>{{from}}, To: {{to}} {{guest}}{{#if children}}({{children}}){{/if}} guests in {{rooms}} rooms</td>
+                <td id="clock"></td>
+            </tr>
+            </thead>
+        </table>
+        <script>
+            $('#clock').countdown({{getRequestLifeTime creationTime}}, function(event) {
+                $(this).html(event.strftime('%D days %H:%M:%S'));
+            });
+        </script>
 
-
-
-    <p>This request will expire in:</p>
-    <span id="clock"></span>
-    <br>
-    <script>
-        $('#clock').countdown({{getRequestLifeTime creationTime}}, function(event) {
-               $(this).html(event.strftime('%D days %H:%M:%S'));
-         });
-    </script>
-
-    {{#each selectedProperties}}
-        <ul>
-            <li>
-                <div id="tab-selector">
-                    <span>Name:{{name}}</span>
-                    <span>Price:{{price}}</span>
+    {{#if isProperty}}
+            <div>
+                <div id="rq-detail-user-data">
+                    <span class="label label-default">User Details</span>
                 </div>
                 <div id="tab-details">
-                    <span>Status{{getLabelFromRequestStatus status}}</span>
+                    <span class="label label-primary">the user ask for 100$</span>
+                    <span class="label label-danger">Make an Offer</span>
                 </div>
-                <p>e qui ci vanno i messaggi</p>
-            </li>
-        </ul>
-    {{/each}}
+            </div>
+            <div>
+            </div>
+    {{else}}
+        {{#each selectedProperties}}
+            <ul style="font-size: 18px">
+                <li>
+                    <div id="rq-detail-hotel-data">
+                        <span class="label label-default">{{name}},{{address}}</span>
+                    </div>
+                </li>
+                <li>
+                    <div id="tab-details">
+                        <span class="label label-success">Hi, i can spend a maximum of {{price}}, can you make me an offer?</span>
+                        <span class="label label-danger">Status: ... {{getLabelFromRequestStatus status}}</span>
+                    </div>
+                </li>
+            </ul>
+        {{/each}}
+    {{/if}}
+   </div>
 </template>

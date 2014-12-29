@@ -14,9 +14,8 @@ Meteor.methods({
             return false; 
         }
 
-        var mailToBeSent   = data.propertyMailSet;
-        
-        var userRequestId = com.pigeon.crypto.cryptString(data.userRequestId);
+        var mailToBeSent         = data.propertyMailSet;
+        var userRequestId        = com.pigeon.crypto.cryptString(data.userRequestId);
         var userRequestIdEncoded = com.pigeon.base64.base64_encode(""+userRequestId);
         
         //TODO: move it into a util mail class
