@@ -15,19 +15,25 @@ Meteor.methods({
         }
 
         var mailToBeSent         = data.propertyMailSet;
-        var userRequestId        = com.pigeon.crypto.cryptString(data.userRequestId);
-        var userRequestIdEncoded = com.pigeon.base64.base64_encode(""+userRequestId);
-        
+
         //TODO: move it into a util mail class
         // add checks!!
         for(var i= 0; i<mailToBeSent.length; i++) {
+
+            var propertyDataForMail = {userRequestId:data.userRequestId, propertyId:mailToBeSent[i].propertyId};
+            var mailRefEncrypted    = com.pigeon.crypto.cryptString(JSON.stringify(propertyDataForMail));
+            var mailRefEncoded      = com.pigeon.base64.base64_encode("" + mailRefEncrypted);
+
             var emailToHotel = {
                 from:       "pigeon.currier@gmail.com",
-                to:         mailToBeSent[i],
+                to:         mailToBeSent[i].mail,
                 subject:    "You have a new request from a Pigeon user!",
-                text:      "Hi you have a new stay request from a Pigeon user. Check http://localhost:3000/property_data/" + userRequestIdEncoded
+                text:      "Hi you have a new stay request from a Pigeon user. Check http://localhost:3000/property_data/" + mailRefEncoded
             };
-            // console.log(JSON.stringify(emailToHotel));
+
+
+console.log(JSON.stringify(emailToHotel));
+
             LogEmail.insert(emailToHotel);
             
             if (sendEnabled) {
