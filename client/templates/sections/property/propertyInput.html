@@ -3,16 +3,16 @@
     <div id="form_container">
         <h1><a>Fill your property data</a></h1>
         <form id="propertyForm" class="appnitro"  method="post" action="">
-            <input type="hidden" value="{{propertyData.property._id}}" name="propertyId" id="propertyId">
+            <input type="hidden" value="{{property._id}}" name="propertyId" id="propertyId">
             <ul>
                 <li id="li_1" >
                     <label class="description" for="li_1">Hotelier Data:</label>
                     <span>
-                        <input id="firstName" name= "element_1_1" class="element text" maxlength="255" size="20" value="{{propertyData.user.profile.firstName}}"/>
+                        <input id="firstName" name= "element_1_1" class="element text" maxlength="255" size="20" value="{{user.profile.firstName}}"/>
                         <label>First Name</label>
                     </span>
                     <span>
-                        <input id="lastName" name= "element_1_2" class="element text" maxlength="255" size="20" value="{{propertyData.user.profile.lastName}}"/>
+                        <input id="lastName" name= "element_1_2" class="element text" maxlength="255" size="20" value="{{user.profile.lastName}}"/>
                         <label>Last Name</label>
                     </span>
 
@@ -35,7 +35,7 @@
 
 
                     <span>
-                        <input id="phone" type="tel" name="element_1_4" class="element text" maxlength="255" size="20" value="{{propertyData.property.phone}}"/>
+                        <input id="phone" type="tel" name="element_1_4" class="element text" maxlength="255" size="20" value="{{property.phone}}"/>
                         <label>Phone</label>
                     </span>
                 </li>
@@ -43,7 +43,7 @@
                 <li id="li_2" >
                     <label class="description" for="li_2">Property Data:</label>
                     <span>
-                        <input id="propertyName" name= "element_2_1" class="element text" maxlength="255" size="30" value="{{propertyData.property.name}}"/>
+                        <input id="propertyName" name= "element_2_1" class="element text" maxlength="255" size="30" value="{{property.name}}"/>
                         <label>Property Name</label>
                     </span>
 
@@ -65,7 +65,7 @@
                     <label class="description" for="li_3">Address</label>
 
                     <div>
-                        <input id="streetLine1" class="element text large" value="{{propertyData.property.address}}" type="text">
+                        <input id="streetLine1" class="element text large" value="{{property.address}}" type="text">
                         <label for="streetLine1">Street Address</label>
                     </div>
 
@@ -75,17 +75,17 @@
                     </div>
 
                     <div class="left">
-                        <input id="city" class="element text medium" value="{{propertyData.property.city}}" type="text">
+                        <input id="city" class="element text medium" value="{{property.city}}" type="text">
                         <label for="city">City</label>
                     </div>
 
                     <div class="right">
-                        <input id="state" class="element text medium" value="{{propertyData.property.state}}" type="text">
+                        <input id="state" class="element text medium" value="{{property.state}}" type="text">
                         <label for="state">State / Province / Region</label>
                     </div>
 
                     <div class="left">
-                        <input id="zip" class="element text medium" maxlength="15" value="{{propertyData.property.zip}}" type="text">
+                        <input id="zip" class="element text medium" maxlength="15" value="{{property.zip}}" type="text">
                         <label for="zip">Postal / Zip Code</label>
                     </div>
 
