@@ -1,0 +1,37 @@
+<template name="propertyRequests">
+    Check the requests you did
+
+    {{#if submittedRequests.count}}
+
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th>From</th>
+                <th>To</th>
+                <th>Rooms</th>
+                <th>Guest</th>
+                <th>From/to</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+
+        {{#each submittedRequests}}
+            <tr  >
+                <td>{{from}}</td>
+                <td>{{to}}</td>
+                <td>{{rooms}}</td>
+                <td>{{guest}} {{#if children}} + {{children}}{{/if}}</td>
+                {{#with aggregatePropertiesData selectedProperties}}
+                    <td>{{minAndMax}}</td>
+                    <td>{{status}}</td>
+                {{/with}}
+                <td><a class="request-detail" meta-attr="{{_id}}" href="">details</a></td>
+            </tr>
+        {{/each}}
+        </tbody>
+    </table>
+    {{else}}
+        <br>you did not perform any request!!
+    {{/if}}
+</template>

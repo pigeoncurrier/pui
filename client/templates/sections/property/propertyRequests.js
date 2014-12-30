@@ -1,0 +1,106 @@
+Template.propertyRequests.helpers({
+
+    receivedRequests: function(){
+
+        //TODO:use the method instead of the find
+/*
+        Meteor.call('getUserSubmittedRequests', post, function(error, result) {
+            // display the error to the user and abort
+            if (error)
+                return alert(error.reason);
+            Router.go('postPage', {_id: result._id});
+        });
+*/
+
+        //TODO: attenzione qquesto va fatto come metodo in quanto si da accesso a request fatte anche su altri hotel
+
+        var userProperties = Meteor.user().profile.properties;
+        var requestsOnUserProperties = UserRequest.find( { "selectedProperties._id": { $in: userProperties } } )
+        return requestsOnUserProperties;
+
+    },
+
+
+
+
+    // TODO: idem come sopra e i testtttttttttttt
+    aggregatePropertiesData: function(selectedProperties){
+
+
+        var min         = false,
+            max         = false,
+            statusArray = [],
+            response    = {};
+
+        for(var i=0; i<selectedProperties.length; i++){
+            var price = selectedProperties[i].price;
+
+            console.log("price:" + price);
+
+            if(!min || price<min){
+                min = price;
+            }
+
+            console.log("min:" + min);
+
+            if(!max || price>max){
+                max = price;
+            }
+
+            console.log("max:" + max);
+
+            statusArray.push(selectedProperties[i].status);
+
+        }
+
+        if(min==max){
+            response.minAndMax = min;
+        } else {
+            response.minAndMax = min+"/"+max;
+        }
+
+        var mergedStatus = _.reduce(statusArray, function(memo, i){
+                return com.pigeon.util.mergeRequestStatus(memo, statusArray[i]);
+
+        })
+
+        response.status = com.pigeon.util.getLabelFromRequestStatus(mergedStatus);
+
+        return response;
+
+    }
+
+
+    /*
+    ,
+
+
+    getActionFromRequestStatus: function (statusAsNum) {
+        if (statusAsNum === come.pigeon.util.requestStatusEnum.PENDIGN) {
+            return 0;
+        } else if (statusAsNum === come.pigeon.util.requestStatusEnum.PROPOSAL) {
+            return "propertyProposalDetails";
+        } else if (statusAsNum === come.pigeon.util.requestStatusEnum.REJECTED) {
+            return 0;
+        }
+    }*/
+
+});
+
+
+Template.userRequests.events({
+    'click .request-detail': function(e){
+
+
+
+        e.preventDefault();
+
+        var requestRoute    = '/request_detail/' + $(e.target).attr("meta-attr");
+        console.log("rq id:" + requestRoute);
+
+
+        Router.go(requestRoute);
+
+        //window.location = requestRoute;
+    }
+})
