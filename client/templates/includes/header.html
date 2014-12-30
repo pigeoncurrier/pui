@@ -11,13 +11,15 @@
                 </button>
 
                 <a class="navbar-brand" href="{{pathFor 'home'}}">home</a>
+
                 <a class="navbar-brand" href="{{pathFor 'createRequest'}}">create a request</a>
 
                 {{#if userDetail}}
 
-                    {{#if userDetail.isProperty}}
+                    {{#if userDetail.profile.isProperty}}
                         <a class="navbar-brand" href="{{pathFor 'propertyInput'}}">my data</a>
-                    {{else}}
+                        <a class="navbar-brand" href="{{pathFor 'propertyRequests'}}">my requests</a>
+                {{else}}
                         <a class="navbar-brand" href="{{pathFor 'userRequests'}}">my submitted requests</a>
                     {{/if}}
 

@@ -1,8 +1,6 @@
 Meteor.methods({
     insertPropertyUser: function(data){
 
-        console.log("in send mail");
-
 // we are creating a new user so no user check! here as an example....
 //        var user = Meteor.users.find(this.userId);
 //        if(!user){
@@ -10,20 +8,14 @@ Meteor.methods({
 //        }
 //
 
-
         var newPropertyUser = false;
         // is he logged?
         if(!this.userId){
 
             var user = Meteor.users.findOne({"emails.address": data.email});
 
-            console.log("looking for " + data.email);
-
             // is a new user
             if(!user){
-
-
-
                 newPropertyUser = Accounts.createUser({
                     email :     data.email,
                     password :  data.password,
@@ -38,6 +30,7 @@ Meteor.methods({
                 // not logged and existing??
                 // bad things are happening
                 //TODO: return some kind of error!
+                return false;
             }
         }
         // else is logged in and i dont want to allow a password change like that
@@ -46,8 +39,10 @@ Meteor.methods({
 
         if(!newPropertyUser && !this.userId){
             //TODO throw an error cause was not logged or new user created
-            return;
+            return false;
         }
+
+        var userId = newPropertyUser?newPropertyUser:this.userId;
 
 
 
@@ -65,30 +60,20 @@ Meteor.methods({
             zip:        data.zip,
             country:    data.country,
             status:     com.pigeon.util.propertyStatusEnum.NOT_ACTIVE,
-            owner:      newPropertyUser
+            owner:      userId
         }
 
-        console.log("data from form");
-        console.log(JSON.stringify(propertyData));
-
-
-        var property = Property.findOne(updateOrInsertQs)
-
-        console.log(JSON.stringify(updateOrInsertQs));
-
-        console.log(JSON.stringify(property));
-//
 //        // exec update or insert
-//        var operationResult = Property.update(
-//                                                updateOrInsertQs,
-//                                                propertyData,
-//                                                { upsert: true },
-//                                                function(err, numberAffected, rawResponse) {
-//                                                    // send confirm email?
-//                                                }
-//        );
+        //TODO: manage errors
+        var operationResult = Property.upsert(updateOrInsertQs,propertyData);
 
-        //console.log(JSON.stringify(operationResult));
+        //TODO: multiple hotel per user to be done
+        var insertedPropertyId = operationResult.insertedId;
+        if(insertedPropertyId){
+            Meteor.users.update( { _id: userId }, { $set: { 'profile.properties': [insertedPropertyId] }} );
+        }
+
+        return true;
 
     }
 })

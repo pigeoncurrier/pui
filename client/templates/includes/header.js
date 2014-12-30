@@ -3,6 +3,11 @@ Template.header.helpers({
 
     userDetail: function(){
         return Meteor.user();
+    },
+
+
+    orFunc:function(a,b){
+
     }
 
 });
