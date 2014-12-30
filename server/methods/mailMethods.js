@@ -20,7 +20,11 @@ Meteor.methods({
         // add checks!!
         for(var i= 0; i<mailToBeSent.length; i++) {
 
-            var propertyDataForMail = {userRequestId:data.userRequestId, propertyId:mailToBeSent[i].propertyId};
+            var propertyDataForMail = {
+                                        userRequestId:data.userRequestId, 
+                                        propertyId:mailToBeSent[i].propertyId, 
+                                        propertyUserId:mailToBeSent[i].owner
+                                    };
             var mailRefEncrypted    = com.pigeon.crypto.cryptString(JSON.stringify(propertyDataForMail));
             var mailRefEncoded      = com.pigeon.base64.base64_encode("" + mailRefEncrypted);
 
